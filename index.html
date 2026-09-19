@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AIにやらせる女</title>
+<meta name="description" content="引き寄せで心を整えて、AIで現実も動かす。面倒なことは全部AIにやらせてる、AIにやらせる女の公式アプリ。商品・発信・プロフィール。">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="AIにやらせる女">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#fbf6f3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1719" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="AIにやらせる女">
+<meta property="og:description" content="手抜きは、スキルです。引き寄せで心を整えて、AIで現実も動かす。">
+<meta property="og:image" content="icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --ground:#f3e6e6; --bg:#fbf6f3; --card:#fffdfb; --card-2:#f8ecec;
+    --ink:#3a302d; --ink-2:#5b4f4b; --muted:#8c7b74; --line:#eedfda;
+    --sakura:#c9748b; --sakura-soft:#f6e1e6; --gold:#a8843f; --gold-soft:#f3ead7;
+    --ok:#3f7f5a; --shadow:0 14px 34px -26px rgba(80,50,50,.45);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ground:#140f11; --bg:#1c1719; --card:#262023; --card-2:#2e2629;
+      --ink:#f2e8e5; --ink-2:#d6c8c4; --muted:#b09d98; --line:#3a2e33;
+      --sakura:#e7a5b8; --sakura-soft:#3a2830; --gold:#d6bb7c; --gold-soft:#342c20;
+      --ok:#8fbf9d; --shadow:0 14px 34px -24px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#140f11; --bg:#1c1719; --card:#262023; --card-2:#2e2629;
+    --ink:#f2e8e5; --ink-2:#d6c8c4; --muted:#b09d98; --line:#3a2e33;
+    --sakura:#e7a5b8; --sakura-soft:#3a2830; --gold:#d6bb7c; --gold-soft:#342c20;
+    --ok:#8fbf9d; --shadow:0 14px 34px -24px rgba(0,0,0,.8);
+  }
+  *{box-sizing:border-box}
+  html{background:var(--ground)}
+  body{margin:0;min-height:100vh;background:
+      radial-gradient(1200px 700px at 50% -10%, var(--sakura-soft), transparent 60%), var(--ground);
+    color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;
+    line-height:1.8;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+  .app{max-width:520px;margin:0 auto;min-height:100vh;background:var(--bg);position:relative;
+    box-shadow:0 0 0 1px var(--line);padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+  .mincho{font-family:"Shippori Mincho","Yu Mincho",serif}
+  a{color:inherit}
+  button{font:inherit;color:inherit}
+  :focus-visible{outline:2px solid var(--sakura);outline-offset:2px;border-radius:6px}
+
+  /* top bar */
+  .top{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:calc(10px + env(safe-area-inset-top)) 16px 10px;background:color-mix(in srgb,var(--bg) 88%,transparent);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .brand{display:flex;align-items:center;gap:9px;text-decoration:none;min-width:0}
+  .mark{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;flex:none;
+    border:1.5px solid var(--gold);color:var(--gold);font-family:"Shippori Mincho",serif;font-weight:700;font-size:.8rem;letter-spacing:.02em;background:var(--card)}
+  .brand b{font-family:"Shippori Mincho",serif;font-size:1.02rem;letter-spacing:.06em;white-space:nowrap}
+  .sns{display:flex;gap:6px}
+  .sns a{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);
+    background:var(--card);color:var(--ink-2);text-decoration:none}
+  .sns a:hover{border-color:var(--sakura);color:var(--sakura)}
+  .sns svg{width:15px;height:15px}
+
+  main{padding:0 16px}
+  section.view{display:none;padding-top:18px;animation:in .25s ease}
+  section.view.on{display:block}
+  @keyframes in{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  .eyebrow{font-size:.72rem;letter-spacing:.24em;color:var(--gold);text-transform:uppercase}
+  h2{font-family:"Shippori Mincho",serif;font-size:1.18rem;letter-spacing:.06em;margin:30px 0 12px;text-wrap:balance;
+    display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+  h2 small{font-family:"Zen Kaku Gothic New",sans-serif;font-size:.74rem;letter-spacing:.04em;color:var(--muted);font-weight:400}
+  p{margin:0 0 .8em;color:var(--ink-2)}
+
+  /* hero */
+  .hero{position:relative;border-radius:18px;overflow:hidden;padding:30px 22px 24px;
+    background:linear-gradient(160deg,var(--card) 0%,var(--sakura-soft) 100%);border:1px solid var(--line)}
+  .hero::after{content:"";position:absolute;inset:10px;border:1px solid var(--gold);opacity:.35;border-radius:12px;pointer-events:none}
+  .hero h1{font-family:"Shippori Mincho",serif;font-weight:600;font-size:clamp(1.9rem,8vw,2.35rem);line-height:1.35;
+    letter-spacing:.06em;margin:10px 0 14px}
+  .hero h1 .dot{color:var(--sakura)}
+  .hero p{font-size:.92rem;margin:0}
+  .cta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;position:relative;z-index:1}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 16px;border-radius:999px;
+    font-size:.86rem;text-decoration:none;border:1px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn.sakura{background:var(--sakura);border-color:var(--sakura);color:#fff}
+  .btn.block{display:flex;width:100%;padding:13px 16px;font-size:.95rem}
+
+  /* cards */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
+  .stack{display:flex;flex-direction:column;gap:12px}
+  .product{display:grid;grid-template-columns:1fr auto;gap:4px 12px;text-decoration:none;align-items:start}
+  .product .kind{grid-column:1/-1;display:flex;gap:6px;align-items:center;font-size:.7rem;color:var(--muted);letter-spacing:.08em}
+  .product h3{margin:0;font-family:"Shippori Mincho",serif;font-size:1.05rem;letter-spacing:.03em;line-height:1.55;text-wrap:balance}
+  .product .price{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap;font-size:1rem}
+  .product .desc{grid-column:1/-1;font-size:.84rem;color:var(--ink-2);margin:4px 0 0}
+  .product .go{grid-column:1/-1;font-size:.8rem;color:var(--sakura);margin-top:6px}
+  .tag{display:inline-block;padding:1px 8px;border-radius:999px;font-size:.68rem;letter-spacing:.04em}
+  .tag.free{background:var(--gold-soft);color:var(--gold)}
+  .tag.paid{background:var(--sakura-soft);color:var(--sakura)}
+  .tag.soon{background:var(--card-2);color:var(--muted);border:1px dashed var(--line)}
+  .tag.svc{background:var(--card-2);color:var(--ink-2)}
+
+  .plans{display:grid;grid-template-columns:1fr;gap:10px;margin-top:4px}
+  .plan{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--bg)}
+  .plan.feat{border-color:var(--sakura)}
+  .plan .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .plan b{font-family:"Shippori Mincho",serif;letter-spacing:.03em}
+  .plan .yen{font-variant-numeric:tabular-nums;font-weight:700}
+  .plan .yen s{color:var(--muted);font-weight:400;font-size:.74rem;margin-right:6px}
+  .plan ul{margin:6px 0 0;padding-left:1.1em;font-size:.82rem;color:var(--ink-2)}
+
+  details{border-top:1px solid var(--line);padding:10px 0}
+  details:last-of-type{border-bottom:1px solid var(--line)}
+  summary{cursor:pointer;font-size:.9rem;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"＋";color:var(--gold)}
+  details[open] summary::after{content:"－"}
+  details ul, details dl{font-size:.82rem;color:var(--ink-2);margin:8px 0 2px}
+  details dl dt{font-weight:500;color:var(--ink);margin-top:8px}
+  details dl dd{margin:0}
+
+  /* posts */
+  .post{padding:13px 0;border-top:1px solid var(--line)}
+  .post:first-child{border-top:none;padding-top:2px}
+  .post .meta{display:flex;gap:8px;align-items:center;font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums}
+  .post .txt{white-space:pre-line;font-size:.88rem;color:var(--ink);margin-top:4px;
+    display:-webkit-box;-webkit-line-clamp:8;-webkit-box-orient:vertical;overflow:hidden}
+  .post.open .txt{-webkit-line-clamp:unset}
+  .post button{background:none;border:0;padding:0;color:var(--sakura);font-size:.76rem;cursor:pointer;margin-top:2px}
+  .skeleton{height:14px;border-radius:6px;background:var(--card-2);margin:8px 0}
+
+  /* sns list */
+  .snsrow{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:14px 0;border-top:1px solid var(--line);text-decoration:none}
+  .snsrow:first-child{border-top:none}
+  .snsrow .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--card-2);color:var(--ink)}
+  .snsrow .ic svg{width:20px;height:20px}
+  .snsrow b{display:block;font-size:.95rem}
+  .snsrow span{font-size:.78rem;color:var(--muted)}
+  .snsrow .arr{color:var(--gold)}
+
+  /* profile */
+  .prof{display:flex;gap:14px;align-items:center}
+  .avatar{width:74px;height:74px;border-radius:50%;flex:none;display:grid;place-items:center;
+    background:radial-gradient(circle at 50% 40%,var(--card),var(--sakura-soft));border:1.5px solid var(--gold);
+    font-family:"Shippori Mincho",serif;color:var(--gold);font-weight:700;font-size:1.3rem}
+  .prof b{font-family:"Shippori Mincho",serif;font-size:1.2rem;letter-spacing:.06em;display:block}
+  .prof span{font-size:.8rem;color:var(--muted)}
+  .bio{font-family:"Shippori Mincho",serif;font-size:1rem;line-height:2.05;color:var(--ink);margin:16px 0 0;letter-spacing:.03em}
+  .values{display:grid;gap:10px}
+  .value{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start}
+  .value i{font-style:normal;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--gold);color:var(--gold);font-size:.78rem;font-family:"Shippori Mincho",serif}
+  .value b{font-size:.92rem}
+  .value p{font-size:.82rem;margin:2px 0 0}
+  .foot{font-size:.72rem;color:var(--muted);text-align:center;padding:28px 0 8px}
+
+  /* bottom tabs */
+  nav.tabs{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:520px;z-index:6;
+    display:grid;grid-template-columns:repeat(4,1fr);padding:6px 8px calc(6px + env(safe-area-inset-bottom));
+    background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-top:1px solid var(--line)}
+  nav.tabs a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 0 5px;text-decoration:none;
+    font-size:.68rem;color:var(--muted);border-radius:12px;letter-spacing:.04em}
+  nav.tabs svg{width:22px;height:22px}
+  nav.tabs a[aria-current="page"]{color:var(--sakura);background:var(--sakura-soft)}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <a class="brand" href="#home" aria-label="ホームへ"><span class="mark">AI</span><b>AIにやらせる女</b></a>
+    <div class="sns" aria-label="SNS">
+      <a href="https://x.com/ai_woman01" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.3L2 3h6.4l4.4 5.8L17.8 3Zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5Z"/></svg></a>
+      <a href="https://www.threads.com/@ai_woman01" target="_blank" rel="noopener" aria-label="Threads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16.5 11.2c-.3-3-2-4.4-4.5-4.4-2.6 0-4.3 1.9-4.3 5.2 0 3.4 1.8 5.3 4.5 5.3 2.3 0 3.8-1.3 3.8-3.2 0-1.8-1.4-2.8-3.4-2.8-1.7 0-2.8.8-2.8 2 0 1.1.9 1.8 2.2 1.8 2.2 0 3.6-1.9 3.6-5.1"/><path d="M19.5 12c0 5.3-3 8.5-7.5 8.5S4.5 17.2 4.5 12 7.5 3.5 12 3.5c3.6 0 6 1.8 6.9 4.9"/></svg></a>
+      <a href="https://www.instagram.com/ai_woman01/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a href="https://note.com/ai_woman01" target="_blank" rel="noopener" aria-label="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 19V7.5C6 6 7 5 8.5 5h6C17 5 18 6.2 18 8.5V19"/></svg></a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ホーム -->
+    <section class="view" id="v-home" data-tab="home">
+      <div class="hero">
+        <div class="eyebrow">record of a lazy woman</div>
+        <h1>手抜きは、<br>スキルです<span class="dot">。</span></h1>
+        <p>手取り20万・貯金ゼロ。大根1本389円を棚に戻してた頃から、自分に戻るまでの記録。引き寄せで心を整えて、AIで現実も動かす。面倒なことは、全部AIにやらせてます。</p>
+        <div class="cta-row">
+          <a class="btn" href="#products">商品を見る</a>
+          <a class="btn ghost" href="https://note.com/ai_woman01/n/n1fc7064ff3e2" target="_blank" rel="noopener">無料で読む記事</a>
+        </div>
+      </div>
+
+      <h2>まず読んでほしい記事 <small>note</small></h2>
+      <div id="homePick" class="stack"></div>
+
+      <h2>さいきんの投稿 <small id="postsNote">X・Threads</small></h2>
+      <div class="card"><div id="homePosts"><div class="skeleton"></div><div class="skeleton" style="width:80%"></div><div class="skeleton" style="width:60%"></div></div></div>
+      <p style="margin-top:10px;font-size:.8rem"><a href="#sns" style="color:var(--sakura)">発信のすべてを見る →</a></p>
+    </section>
+
+    <!-- 商品 -->
+    <section class="view" id="v-products" data-tab="products">
+      <div class="eyebrow">products</div>
+      <h2 style="margin-top:6px">読みもの <small>noteで読めます</small></h2>
+      <div id="reads" class="stack"></div>
+
+      <h2>サービス <small>面談なし・メールのみ</small></h2>
+      <div class="card">
+        <div class="product" style="cursor:default">
+          <div class="kind"><span class="tag svc">サービス</span>SNS自動投稿の構築</div>
+          <h3>手抜きは、スキル。<br>あなたのSNSに、自動投稿の仕組みを。</h3>
+          <p class="desc">私が毎日使っている自動投稿の仕組みを、あなたのアカウントに作ります。パソコンを閉じていても、時間どおりに投稿されます。</p>
+        </div>
+        <div class="plans" style="margin-top:12px">
+          <div class="plan"><div class="row"><b>A｜X＋Threads</b><span class="yen"><s>¥148,000</s>¥68,000</span></div>
+            <ul><li>自動投稿の仕組みづくり</li><li>投稿30本・画像カード10枚</li><li>使い方の動画</li></ul></div>
+          <div class="plan feat"><div class="row"><b>B｜＋Instagram</b><span class="yen"><s>¥198,000</s>¥98,000</span></div>
+            <ul><li>Aの内容すべて</li><li>Instagram連携・画像とキャプション</li><li>世界観の設計</li></ul></div>
+          <div class="plan"><div class="row"><b>C｜＋TikTok・リール</b><span class="yen"><s>¥298,000</s>¥148,000</span></div>
+            <ul><li>Bの内容すべて</li><li>生成動画 月8本・TikTok予約設定</li></ul></div>
+          <p style="font-size:.76rem;margin:0;color:var(--muted)">最初の3名さまはモニター価格です（税込）。月額運用（任意）：テキスト¥19,800／画像¥29,800／動画¥49,800</p>
+        </div>
+        <div style="margin-top:14px">
+          <a class="btn sakura block" href="https://docs.google.com/forms/d/e/1FAIpQLSc6o9DPknlKBj6k9tjbd3LDbqMye55YuLlWcEdW-9CA1kQXug/viewform" target="_blank" rel="noopener">申し込み・相談フォームへ</a>
+          <p style="font-size:.76rem;text-align:center;margin:8px 0 0">検討中でも大丈夫です。3営業日以内にお返事します。</p>
+        </div>
+        <div style="margin-top:12px">
+          <details><summary>正直に、できないこと</summary>
+            <ul>
+              <li>noteの自動投稿はできません（noteに投稿の窓口がないため）。</li>
+              <li>TikTokは公式の予約投稿を使います。</li>
+              <li>Xは投稿ごとにX社への費用がかかります（1本約2円・リンクなしの場合）。</li>
+              <li>各SNSの仕様変更で止まることがあります。復旧手順はお渡しします。</li>
+              <li>フォロワーや売上などの成果はお約束できません。用意するのは「続く仕組み」です。</li>
+            </ul>
+          </details>
+          <details><summary>進め方</summary>
+            <ul>
+              <li>フォームで申し込み → お支払い方法をご案内</li>
+              <li>ヒアリングフォームに記入（10分ほど）</li>
+              <li>入金確認から14営業日以内に納品</li>
+              <li>動画を見ながら15分の初期設定で完了。納品後30日はメールで質問できます</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+      <p style="font-size:.76rem;margin-top:14px"><a href="#legal" style="color:var(--muted)">特定商取引法に基づく表記</a></p>
+    </section>
+
+    <!-- 発信 -->
+    <section class="view" id="v-sns" data-tab="sns">
+      <div class="eyebrow">follow</div>
+      <h2 style="margin-top:6px">発信しているところ</h2>
+      <div class="card">
+        <a class="snsrow" href="https://x.com/ai_woman01" target="_blank" rel="noopener">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.3L2 3h6.4l4.4 5.8L17.8 3Zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5Z"/></svg></span>
+          <div><b>X</b><span>@ai_woman01・毎日のひとこと</span></div><span class="arr">→</span></a>
+        <a class="snsrow" href="https://www.threads.com/@ai_woman01" target="_blank" rel="noopener">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16.5 11.2c-.3-3-2-4.4-4.5-4.4-2.6 0-4.3 1.9-4.3 5.2 0 3.4 1.8 5.3 4.5 5.3 2.3 0 3.8-1.3 3.8-3.2 0-1.8-1.4-2.8-3.4-2.8-1.7 0-2.8.8-2.8 2 0 1.1.9 1.8 2.2 1.8 2.2 0 3.6-1.9 3.6-5.1"/><path d="M19.5 12c0 5.3-3 8.5-7.5 8.5S4.5 17.2 4.5 12 7.5 3.5 12 3.5c3.6 0 6 1.8 6.9 4.9"/></svg></span>
+          <div><b>Threads</b><span>@ai_woman01・ちょっと長めの本音</span></div><span class="arr">→</span></a>
+        <a class="snsrow" href="https://www.instagram.com/ai_woman01/" target="_blank" rel="noopener">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></span>
+          <div><b>Instagram</b><span>@ai_woman01・ことばのカード</span></div><span class="arr">→</span></a>
+        <a class="snsrow" href="https://note.com/ai_woman01" target="_blank" rel="noopener">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 19V7.5C6 6 7 5 8.5 5h6C17 5 18 6.2 18 8.5V19"/></svg></span>
+          <div><b>note</b><span>ai_woman01・じっくり読む記事</span></div><span class="arr">→</span></a>
+      </div>
+
+      <h2>さいきんの投稿 <small>自動で更新されます</small></h2>
+      <div class="card"><div id="allPosts"><div class="skeleton"></div><div class="skeleton" style="width:70%"></div></div></div>
+    </section>
+
+    <!-- プロフィール -->
+    <section class="view" id="v-me" data-tab="me">
+      <div class="eyebrow">profile</div>
+      <div class="card" style="margin-top:10px">
+        <div class="prof"><div class="avatar">AI</div><div><b>AIにやらせる女</b><span>@ai_woman01</span></div></div>
+        <p class="bio">手取り20万・貯金ゼロ。<br>大根1本389円を棚に戻してた頃から、<br>自分に戻るまでの記録。<br>引き寄せで心を整えて、AIで現実も動かす。<br>面倒なことは全部AIにやらせてます。<br>手抜きは、スキルです。</p>
+      </div>
+
+      <h2>ここまでのこと</h2>
+      <div class="card">
+        <p>人に合わせすぎて、自分がどこにもいなかった時期がありました。「何食べたい？」に「なんでもいい」と答えて、仕事しかしていない毎日の中で、ふと思ったんです。私は、誰の人生を生きてるんだろう、って。</p>
+        <p style="margin:0">そこから、お金の不安を見ないふりするのをやめて、自分に「ありがとう」を言うようになって、面倒なことはAIに任せるようにしました。いまも途中です。その途中を、ここに残しています。</p>
+      </div>
+
+      <h2>大事にしていること</h2>
+      <div class="card values">
+        <div class="value"><i>一</i><div><b>「無い」より「在る」を見る</b><p>足りないところを数えるのをやめて、もう在るものに目を向ける。</p></div></div>
+        <div class="value"><i>二</i><div><b>面倒なことは、AIに任せる</b><p>頑張る場所を選ぶために、手を抜けるところは抜く。</p></div></div>
+        <div class="value"><i>三</i><div><b>できないことも、正直に書く</b><p>結果の約束はしません。私がやってきたことを、そのまま渡します。</p></div></div>
+      </div>
+
+      <h2>お問い合わせ</h2>
+      <div class="card">
+        <p style="font-size:.86rem">お仕事のご相談・ご質問は、フォームかXのDMからどうぞ。お返事はメールで、3営業日以内を目安にしています。</p>
+        <div class="cta-row" style="margin-top:6px">
+          <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSc6o9DPknlKBj6k9tjbd3LDbqMye55YuLlWcEdW-9CA1kQXug/viewform" target="_blank" rel="noopener">フォームで送る</a>
+          <a class="btn ghost" href="https://x.com/ai_woman01" target="_blank" rel="noopener">XでDM</a>
+        </div>
+      </div>
+      <p style="font-size:.76rem;margin-top:14px"><a href="#legal" style="color:var(--muted)">特定商取引法に基づく表記</a></p>
+    </section>
+
+    <!-- 特商法 -->
+    <section class="view" id="v-legal" data-tab="me">
+      <div class="eyebrow">legal</div>
+      <h2 style="margin-top:6px">特定商取引法に基づく表記</h2>
+      <div class="card" style="font-size:.82rem">
+        <details open><summary>販売事業者</summary><dl><dd>AIにやらせる女（運営者の氏名・所在地・電話番号は、ご請求があれば遅滞なく開示します）</dd></dl></details>
+        <details open><summary>連絡先</summary><dl><dd>お問い合わせフォームよりご連絡ください</dd></dl></details>
+        <details open><summary>販売価格</summary><dl><dd>各商品ページに記載のとおり（税込）</dd></dl></details>
+        <details open><summary>お支払い方法・時期</summary><dl><dd>noteの記事：noteの決済方法に準じます。<br>構築サービス：銀行振込またはクレジットカード。お申し込み時の前払い。</dd></dl></details>
+        <details open><summary>提供時期</summary><dl><dd>noteの記事：購入後すぐに読めます。<br>構築サービス：入金確認とヒアリングフォームの受領から14営業日以内。</dd></dl></details>
+        <details open><summary>返品・キャンセル</summary><dl><dd>デジタルコンテンツおよびサービスの性質上、お客さまのご都合によるキャンセル・返金はお受けしていません（当方の責任で提供できない場合を除きます）。</dd></dl></details>
+        <details open><summary>ご注意</summary><dl><dd>内容は運営者の個人的な体験と方法をまとめたもので、効果や結果には個人差があります。特定の成果を約束するものではありません。</dd></dl></details>
+      </div>
+      <p style="margin-top:14px"><a class="btn ghost" href="#me">プロフィールへ戻る</a></p>
+    </section>
+
+    <div class="foot">© AIにやらせる女</div>
+  </main>
+
+  <nav class="tabs" aria-label="メニュー">
+    <a href="#home" data-tab="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 11 12 4l8 7v8.5a.5.5 0 0 1-.5.5H15v-6H9v6H4.5a.5.5 0 0 1-.5-.5Z"/></svg>ホーム</a>
+    <a href="#products" data-tab="products"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 8h14l-1 12H6Z"/><path d="M9 8V7a3 3 0 0 1 6 0v1"/></svg>商品</a>
+    <a href="#sns" data-tab="sns"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 5h14v10H10l-5 4Z" stroke-linejoin="round"/><path d="M9 9.5h6M9 12h4"/></svg>発信</a>
+    <a href="#me" data-tab="me"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5" stroke-linecap="round"/></svg>わたし</a>
+  </nav>
+</div>
+
+<script>
+// ── 商品データ（ここを書き換えれば一覧が変わります）
+const READS = [
+  { kind:"free", title:"頑張りすぎて自分を見失った私が、AIを相棒に動き出した話", price:"無料",
+    desc:"はじめましての方へ。私がどこから来て、何をしているのか。",
+    url:"https://note.com/ai_woman01/n/n1fc7064ff3e2" },
+  { kind:"paid", title:"大根1本389円で、棚に戻した日", price:"¥2,980",
+    desc:"お金の不安を「見ないふり」するのをやめた5つのステップ。「無い」を見るか、「在る」を見るか。",
+    url:"https://note.com/ai_woman01/n/n67be2f3baf79", pick:true },
+  { kind:"soon", title:"誰の人生を、生きてる？｜自分に戻る、7つのステップ", price:"¥29,800",
+    desc:"周りに合わせて、気づけば自分がどこにもいなかった人へ。書いて、AIに聞いて、ひとつだけ動く。7つのワーク。",
+    url:"" }   // ← 公開したらnoteのURLを入れる（kindを"paid"に）
+];
+const TAGS = { free:["free","無料"], paid:["paid","有料"], soon:["soon","近日公開"] };
+
+function readCard(r){
+  const [cls,label] = TAGS[r.kind];
+  const inner = `<div class="kind"><span class="tag ${cls}">${label}</span>note</div>
+    <h3>${r.title}</h3><span class="price">${r.kind==="free"?"":r.price}</span>
+    <p class="desc">${r.desc}</p>
+    <span class="go">${r.url ? "noteで読む →" : "まもなく公開します"}</span>`;
+  return r.url
+    ? `<a class="card product" href="${r.url}" target="_blank" rel="noopener">${inner}</a>`
+    : `<div class="card product">${inner}</div>`;
+}
+document.getElementById("reads").innerHTML = READS.map(readCard).join("");
+document.getElementById("homePick").innerHTML = READS.filter(r=>r.pick||r.kind==="free").map(readCard).join("");
+
+// ── タブ切り替え
+function route(){
+  const id = (location.hash || "#home").slice(1);
+  const view = document.getElementById("v-"+id) || document.getElementById("v-home");
+  document.querySelectorAll("section.view").forEach(s=>s.classList.toggle("on", s===view));
+  const tab = view.dataset.tab;
+  document.querySelectorAll("nav.tabs a").forEach(a=>{
+    if(a.dataset.tab===tab) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");
+  });
+  window.scrollTo(0,0);
+}
+addEventListener("hashchange", route); route();
+
+// ── さいきんの投稿（自動投稿の記録から読み込む）
+const RAW = "https://raw.githubusercontent.com/2020activemime-ship-it/autopost/main/";
+const PNAME = { x:"X", threads:"Threads", instagram:"Instagram" };
+function esc(s){ return s.replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+async function loadPosts(){
+  try{
+    const bust = "?t="+Date.now();
+    const [sch, posted] = await Promise.all([
+      fetch(RAW+"schedule.json"+bust).then(r=>r.json()),
+      fetch(RAW+"posted.json"+bust).then(r=>r.json())
+    ]);
+    const done = sch.map(it=>{
+      const res = (posted[it.id]||{}).results || {};
+      const ok = Object.keys(PNAME).filter(p => res[p] && !String(res[p]).startsWith("ERROR"));
+      return ok.length ? { ...it, ok } : null;
+    }).filter(Boolean).sort((a,b)=> b.at.localeCompare(a.at));
+    const row = it => {
+      const d = it.at.slice(5,10).replace("-","/"), t = it.at.slice(11,16);
+      const text = (it.text_threads || it.text || it.text_x || "").replace(/\s*https?:\/\/\S+/g,"").trim();
+      return `<div class="post"><div class="meta"><span>${d} ${t}</span><span>${it.ok.map(p=>PNAME[p]).join("・")}</span></div>
+        <div class="txt">${esc(text)}</div><button type="button" hidden>つづきを読む</button></div>`;
+    };
+    const empty = '<p style="margin:0;font-size:.85rem">まだ投稿がありません。</p>';
+    document.getElementById("homePosts").innerHTML = done.slice(0,3).map(row).join("") || empty;
+    document.getElementById("allPosts").innerHTML = done.slice(0,15).map(row).join("") || empty;
+    requestAnimationFrame(markLong); setTimeout(markLong,400);
+  }catch(e){
+    const msg = '<p style="margin:0;font-size:.85rem">投稿を読み込めませんでした。SNSのリンクから直接ご覧ください。</p>';
+    document.getElementById("homePosts").innerHTML = msg;
+    document.getElementById("allPosts").innerHTML = msg;
+  }
+}
+function markLong(){
+  document.querySelectorAll(".post").forEach(p=>{
+    const t=p.querySelector(".txt"), b=p.querySelector("button");
+    if(t && b && !p.classList.contains("open")) b.hidden = !(t.scrollHeight > t.clientHeight + 2);
+  });
+}
+addEventListener("hashchange", ()=>setTimeout(markLong,60));
+if(document.fonts) document.fonts.ready.then(markLong);
+document.addEventListener("click", e=>{
+  if(e.target.matches(".post button")){ const p=e.target.closest(".post"); p.classList.toggle("open"); e.target.textContent = p.classList.contains("open")?"とじる":"つづきを読む"; }
+});
+loadPosts();
+document.addEventListener("visibilitychange", ()=>{ if(document.visibilityState==="visible") loadPosts(); });
+if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script>
+</body>
+</html>
