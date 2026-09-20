@@ -12,8 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="AIにやらせる女">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="theme-color" content="#fbf6f3" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#1e1720" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#fbf6f3">
 <meta property="og:title" content="AIにやらせる女">
 <meta property="og:description" content="手抜きは、スキルです。引き寄せで心を整えて、AIで現実も動かす。">
 <meta property="og:image" content="icon-512.png">
@@ -27,22 +26,8 @@
     --sakura:#c9748b; --sakura-soft:#f6e1e6; --gold:#a8843f; --gold-soft:#f3ead7;
     --ok:#3f7f5a; --shadow:0 14px 34px -26px rgba(80,50,50,.45);
   }
-  @media (prefers-color-scheme:dark){
-    :root:not([data-theme="light"]){
-      --ground:#150f14; --bg:#1e1720; --card:#2a2029; --card-2:#332632;
-      --ink:#f7ecf0; --ink-2:#ded0d8; --muted:#b9a3ae; --line:#41323e;
-      --sakura:#f2a9c0; --sakura-soft:#3f2334; --gold:#e0c68f; --gold-soft:#3a2f28;
-      --ok:#8fbf9d; --shadow:0 14px 34px -24px rgba(0,0,0,.8);
-    }
-  }
-  :root[data-theme="dark"]{
-    --ground:#150f14; --bg:#1e1720; --card:#2a2029; --card-2:#332632;
-    --ink:#f7ecf0; --ink-2:#ded0d8; --muted:#b9a3ae; --line:#41323e;
-    --sakura:#f2a9c0; --sakura-soft:#3f2334; --gold:#e0c68f; --gold-soft:#3a2f28;
-    --ok:#8fbf9d; --shadow:0 14px 34px -24px rgba(0,0,0,.8);
-  }
   *{box-sizing:border-box}
-  html{background:var(--ground)}
+  html{background:var(--ground);color-scheme:light}
   body{margin:0;min-height:100vh;background:
       radial-gradient(1200px 700px at 50% -10%, var(--sakura-soft), transparent 60%), var(--ground);
     color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;
