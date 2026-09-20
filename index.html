@@ -210,7 +210,7 @@
     <!-- 商品 -->
     <section class="view" id="v-products" data-tab="products">
       <div class="eyebrow">products</div>
-      <h2 style="margin-top:6px">読みもの <small>noteで読めます</small></h2>
+      <h2 style="margin-top:6px">読みもの <small>noteで購入できます</small></h2>
       <div id="reads" class="stack"></div>
 
       <h2>サービス <small>面談なし・メールのみ</small></h2>
@@ -363,7 +363,7 @@ function readCard(r){
     ? `<a class="card product" href="${r.url}" target="_blank" rel="noopener">${inner}</a>`
     : `<div class="card product">${inner}</div>`;
 }
-document.getElementById("reads").innerHTML = READS.map(readCard).join("");
+document.getElementById("reads").innerHTML = READS.filter(r=>r.kind!=="free").map(readCard).join("");
 document.getElementById("homePick").innerHTML = READS.filter(r=>r.pick||r.kind==="free").map(readCard).join("");
 
 // ── タブ切り替え
