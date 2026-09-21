@@ -62,9 +62,13 @@
   .plans button b{display:block;font-family:"Shippori Mincho",serif}
   .plans button[aria-pressed=true]{border-color:var(--sakura);background:var(--sakura-soft)}
   .hint{font-size:.78rem;color:var(--muted);margin:6px 0 0}
+  .field{margin:14px 0 6px;padding:14px 16px;border-radius:12px;background:var(--sakura-soft);border:1px solid color-mix(in srgb,var(--sakura) 35%,transparent)}
+  .field label.f{margin-top:0;font-weight:700;color:var(--ink)}
+  .field .hint{color:var(--ink-2)}
+  .lock{background:var(--card-2);border-radius:8px;padding:6px 10px;display:inline-block}
 
   /* steps */
-  .step{position:relative;padding-left:0}
+  .step{position:relative}
   .step[hidden]{display:none}
   .step .head{display:flex;align-items:flex-start;gap:14px}
   .num{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-family:"Shippori Mincho",serif;
@@ -144,27 +148,14 @@
 
 <!-- 準備 -->
 <section class="card prep" aria-labelledby="prepTitle">
-  <h2 id="prepTitle" class="mincho" style="font-family:'Shippori Mincho',serif;margin:0 0 4px;font-size:1.1rem">はじめに2つだけ教えてください</h2>
-  <p class="hint" style="margin-top:0">入力した内容は、このパソコンの中にだけ保存されます。どこにも送られません。</p>
-
-  <label class="f">ご購入のプラン</label>
+  <h2 id="prepTitle" class="mincho" style="font-family:'Shippori Mincho',serif;margin:0 0 4px;font-size:1.1rem">はじめに、ご購入のプランを選んでください</h2>
+  <p class="hint" style="margin-top:0">プランに合わせて、必要な手順だけが表示されます。</p>
   <div class="plans" role="group" aria-label="プラン">
     <button type="button" data-plan="A" aria-pressed="false"><b>プランA</b>X＋Threads</button>
     <button type="button" data-plan="B" aria-pressed="false"><b>プランB</b>＋Instagram</button>
     <button type="button" data-plan="C" aria-pressed="false"><b>プランC</b>＋動画</button>
   </div>
 
-  <div class="row2">
-    <div>
-      <label class="f" for="ghUser">GitHubのユーザー名</label>
-      <input type="text" id="ghUser" placeholder="例：hanako-sns" autocomplete="off" spellcheck="false">
-    </div>
-    <div>
-      <label class="f" for="ghRepo">コピーした置き場所の名前（手順2で決めます）</label>
-      <input type="text" id="ghRepo" placeholder="例：my-autopost" autocomplete="off" spellcheck="false">
-    </div>
-  </div>
-  <p class="hint">ここを入れると、各手順の「この画面を開く」ボタンが、あなた専用の画面に直接つながります。</p>
 </section>
 
 <div class="note key"><b>大切なお願い</b>　このあと発行する「鍵」（キー・トークン）は、販売者を含め、誰にも送らないでください。あなたのGitHubの中にだけ貼り付けます。レクチャー動画の中でも、鍵の文字は映していません。</div>
@@ -178,8 +169,13 @@
       <li>下のボタンからGitHubを開いて、「Sign up」を押す</li>
       <li>メールアドレス・パスワード・ユーザー名を決める</li>
       <li>届いたメールのコードを入力する</li>
-      <li>決めたユーザー名を、このページ上の「GitHubのユーザー名」に入れる</li>
+      <li>決めたユーザー名を、下の欄に入れる（すでにアカウントがある方も入れてください）</li>
     </ol>
+    <div class="field">
+      <label class="f" for="ghUser">あなたのGitHubのユーザー名</label>
+      <input type="text" id="ghUser" placeholder="例：hanako-sns" autocomplete="off" spellcheck="false">
+      <p class="hint">GitHubの画面右上の丸いアイコンを押すと、太字で出ている名前です。ここに入れると、このあとの「この画面を開く」ボタンが、あなたの画面に直接つながります。入れた内容は、このパソコンの中にだけ保存されます。</p>
+    </div>
     <a class="go" href="https://github.com/signup" target="_blank" rel="noopener">GitHubを開く<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h7v7M13 3 4 12"/></svg></a>
     <div class="check"><button type="button">できた</button><span></span></div>
   </div>
@@ -192,12 +188,17 @@
     <ol class="do">
       <li>招待メールの「View invitation」→「Accept invitation」を押す（下のボタンからでも開けます）</li>
       <li>開いたページの右上、緑の <b>「Use this template」→「Create a new repository」</b> を押す</li>
-      <li>Repository name に名前を入れる（例：<code>my-autopost</code>）。同じ名前を、このページ上の「置き場所の名前」にも入れる</li>
+      <li>Repository name に名前を入れる（例：<code>my-autopost</code>）</li>
       <li class="plan-a"><b>Private</b>（非公開）を選んで「Create repository」</li>
       <li class="plan-bc"><b>Public</b>（公開）を選んで「Create repository」<br><span class="hint">Instagramは、ネット上から見える画像しか投稿できないためです。投稿の文章や鍵は見えません。</span></li>
     </ol>
     <a class="go" href="https://github.com/2020activemime-ship-it/autopost-template/invitations" target="_blank" rel="noopener">招待を承認する<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h7v7M13 3 4 12"/></svg></a>
     <a class="go ghost" href="https://github.com/2020activemime-ship-it/autopost-template/generate" target="_blank" rel="noopener">コピーを作る画面を開く<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h7v7M13 3 4 12"/></svg></a>
+    <div class="field">
+      <label class="f" for="ghRepo">いま付けた名前（Repository name）</label>
+      <input type="text" id="ghRepo" placeholder="例：my-autopost" autocomplete="off" spellcheck="false">
+      <p class="hint">上の3番で入れた名前を、同じように入れてください。</p>
+    </div>
     <div class="check"><button type="button">できた</button><span></span></div>
   </div>
 </article>
@@ -211,7 +212,7 @@
       <li>「Save」を押す</li>
     </ol>
     <a class="go need-repo" data-path="/settings/actions" href="#" target="_blank" rel="noopener">この画面を開く<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h7v7M13 3 4 12"/></svg></a>
-    <p class="hint need-repo-hint">上の2か所（ユーザー名・置き場所の名前）を入れると押せるようになります。</p>
+    <p class="hint need-repo-hint lock">手順1のユーザー名と、手順2の名前を入れると押せるようになります。</p>
     <div class="check"><button type="button">できた</button><span></span></div>
   </div>
 </article>
