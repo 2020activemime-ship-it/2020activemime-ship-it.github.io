@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>自動投稿セットアップ</title>
+<meta name="description" content="SNS自動投稿システムをご購入いただいた方専用の、はじめの設定ガイドです。">
+<link rel="icon" href="../icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+  :root{
+    --ground:#f3e6e6; --bg:#fbf6f3; --card:#fffdfb; --card-2:#f8ecec;
+    --ink:#3a302d; --ink-2:#5b4f4b; --muted:#8c7b74; --line:#eedfda;
+    --sakura:#c9748b; --sakura-soft:#f6e1e6; --gold:#a8843f; --gold-soft:#f3ead7;
+    --ok:#3f7f5a; --ok-soft:#e3f0e8; --warn:#9a5a1c; --warn-soft:#fbeedd;
+    --code:#f4ecea;
+  }
+  *{box-sizing:border-box}
+  html{background:var(--ground);color-scheme:light}
+  body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,var(--sakura-soft),transparent 60%),var(--ground);
+    color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    line-height:1.85;-webkit-font-smoothing:antialiased;padding:0 16px 80px}
+  a{color:var(--sakura)}
+  button{font:inherit;color:inherit;cursor:pointer}
+  :focus-visible{outline:2px solid var(--sakura);outline-offset:2px;border-radius:6px}
+  code,.mono{font-family:"JetBrains Mono",ui-monospace,Consolas,monospace;font-size:.86em}
+  code{background:var(--code);padding:1px 6px;border-radius:5px;word-break:break-all}
+
+  .wrap{max-width:760px;margin:0 auto}
+  header.top{padding:28px 0 8px;display:flex;align-items:center;gap:12px}
+  header.top img{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--gold);object-fit:cover}
+  header.top .who{font-family:"Shippori Mincho",serif;letter-spacing:.06em}
+  header.top .who small{display:block;font-family:inherit;font-size:.72rem;color:var(--muted);letter-spacing:.14em}
+
+  .hero{margin:14px 0 18px;padding:26px 24px;border-radius:16px;border:1px solid var(--line);
+    background:linear-gradient(160deg,var(--card),var(--sakura-soft));position:relative}
+  .hero::after{content:"";position:absolute;inset:9px;border:1px solid var(--gold);opacity:.3;border-radius:11px;pointer-events:none}
+  .eyebrow{font-size:.72rem;letter-spacing:.26em;color:var(--gold)}
+  h1{font-family:"Shippori Mincho",serif;font-weight:600;font-size:clamp(1.6rem,5vw,2.1rem);letter-spacing:.06em;margin:6px 0 10px;text-wrap:balance}
+  .hero p{margin:0 0 .6em;color:var(--ink-2)}
+  .facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;position:relative;z-index:1}
+  .facts span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:.8rem;color:var(--ink-2)}
+
+  /* sticky progress */
+  .progress{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--ground) 90%,transparent);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:10px 0;margin:0 -2px}
+  .bar{height:8px;border-radius:99px;background:var(--card-2);overflow:hidden;border:1px solid var(--line)}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sakura),var(--gold));transition:width .35s ease}
+  .progress .lbl{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);margin-top:4px;font-variant-numeric:tabular-nums}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 20px 16px;margin:14px 0}
+  .card.prep{background:var(--bg)}
+  label.f{display:block;font-size:.82rem;color:var(--ink-2);margin:10px 0 4px}
+  input[type=text]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;font:inherit;color:var(--ink)}
+  input[type=text]:focus{border-color:var(--sakura);outline:none}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .plans{display:flex;gap:8px;flex-wrap:wrap}
+  .plans button{flex:1 1 150px;text-align:left;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:.85rem;line-height:1.5}
+  .plans button b{display:block;font-family:"Shippori Mincho",serif}
+  .plans button[aria-pressed=true]{border-color:var(--sakura);background:var(--sakura-soft)}
+  .hint{font-size:.78rem;color:var(--muted);margin:6px 0 0}
+
+  /* steps */
+  .step{position:relative;padding-left:0}
+  .step[hidden]{display:none}
+  .step .head{display:flex;align-items:flex-start;gap:14px}
+  .num{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-family:"Shippori Mincho",serif;
+    font-weight:600;border:1.5px solid var(--gold);color:var(--gold);background:var(--card);font-variant-numeric:tabular-nums}
+  .step.done .num{background:var(--ok);border-color:var(--ok);color:#fff}
+  .step h2{font-family:"Shippori Mincho",serif;font-size:1.15rem;letter-spacing:.05em;margin:3px 0 2px;text-wrap:balance}
+  .step .meta{font-size:.76rem;color:var(--muted)}
+  .step .body{margin:12px 0 0 50px}
+  .step.done .body{opacity:.72}
+  ol.do{margin:0;padding-left:1.3em}
+  ol.do li{margin:.35em 0}
+  ol.do li::marker{color:var(--gold);font-weight:700}
+  .go{display:inline-flex;align-items:center;gap:6px;margin:6px 6px 2px 0;padding:8px 14px;border-radius:999px;background:var(--ink);color:var(--bg);
+    text-decoration:none;font-size:.84rem;border:1px solid var(--ink)}
+  .go.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .go[aria-disabled=true]{opacity:.45;pointer-events:none}
+  .go svg{width:13px;height:13px}
+  .note{border-radius:10px;padding:10px 14px;margin:12px 0 4px;font-size:.88rem}
+  .note.warn{background:var(--warn-soft);color:var(--warn)}
+  .note.warn b{color:var(--warn)}
+  .note.tip{background:var(--gold-soft);color:#6f5620}
+  .note.key{background:var(--sakura-soft);color:#8a3f55}
+  .check{display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
+  .check button{padding:8px 16px;border-radius:999px;border:1px solid var(--sakura);background:#fff;color:var(--sakura);font-size:.86rem}
+  .step.done .check button{background:var(--ok);border-color:var(--ok);color:#fff}
+  .check span{font-size:.78rem;color:var(--muted)}
+
+  /* secrets table */
+  .tbl{overflow-x:auto;margin:10px 0}
+  table{border-collapse:collapse;width:100%;font-size:.86rem;min-width:520px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+  th{font-weight:500;color:var(--muted);font-size:.76rem;letter-spacing:.06em}
+  tr[hidden]{display:none}
+  .cp{border:1px solid var(--line);background:#fff;border-radius:8px;padding:3px 10px;font-size:.76rem;white-space:nowrap}
+  .cp.ok{border-color:var(--ok);color:var(--ok)}
+  td input[type=checkbox]{width:18px;height:18px;accent-color:var(--ok)}
+  pre{background:var(--code);border-radius:10px;padding:12px 14px;overflow-x:auto;font-size:.82rem;margin:10px 0;line-height:1.7}
+
+  .trouble details{border-bottom:1px solid var(--line);padding:10px 0}
+  .trouble summary{cursor:pointer;font-weight:500}
+  .trouble summary code{margin-left:6px}
+  .trouble details p{margin:.5em 0 0;color:var(--ink-2);font-size:.9rem}
+
+  .finish{text-align:center;padding:28px 20px}
+  .finish h2{font-family:"Shippori Mincho",serif;font-size:1.35rem;letter-spacing:.08em;margin:0 0 8px}
+  footer{margin-top:30px;text-align:center;font-size:.76rem;color:var(--muted)}
+  .reset{background:none;border:none;color:var(--muted);text-decoration:underline;font-size:.76rem}
+
+  @media (max-width:560px){
+    .row2{grid-template-columns:1fr}
+    .step .body{margin-left:0}
+    .card{padding:18px 16px 14px}
+  }
+  @media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <img src="../avatar.jpg" alt="">
+  <div class="who">AIにやらせる女<small>お客さま専用ページ</small></div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">SETUP GUIDE</div>
+  <h1>自動投稿を、はじめましょう</h1>
+  <p>このたびはご購入いただき、ありがとうございます。<br>このページの順番どおりに進めれば、はじめの設定が終わります。レクチャー動画も、このページと同じ順番で進みます。</p>
+  <p>終わったところは「できた」を押してください。途中でページを閉じても、進み具合は残ります。</p>
+  <div class="facts"><span>所要時間 15〜30分</span><span>パソコンでの作業がおすすめ</span><span>プログラミングの知識は不要</span></div>
+</section>
+
+<div class="progress" aria-live="polite">
+  <div class="bar"><i id="barFill"></i></div>
+  <div class="lbl"><span id="barText">0 / 0 完了</span><span id="barNext"></span></div>
+</div>
+
+<!-- 準備 -->
+<section class="card prep" aria-labelledby="prepTitle">
+  <h2 id="prepTitle" class="mincho" style="font-family:'Shippori Mincho',serif;margin:0 0 4px;font-size:1.1rem">はじめに2つだけ教えてください</h2>
+  <p class="hint" style="margin-top:0">入力した内容は、このパソコンの中にだけ保存されます。どこにも送られません。</p>
+
+  <label class="f">ご購入のプラン</label>
+  <div class="plans" role="group" aria-label="プラン">
+    <button type="button" data-plan="A" aria-pressed="false"><b>プランA</b>X＋Threads</button>
+    <button type="button" data-plan="B" aria-pressed="false"><b>プランB</b>＋Instagram</button>
+    <button type="button" data-plan="C" aria-pressed="false"><b>プランC</b>＋動画</button>
+  </div>
+
+  <div class="row2">
+    <div>
+      <label class="f" for="ghUser">GitHubのユーザー名</label>
+      <input type="text" id="ghUser" placeholder="例：hanako-sns" autocomplete="off" spellcheck="false">
+    </div>
+    <div>
+      <label class="f" for="ghRepo">コピーした置き場所の名前（手順2で決めます）</label>
+      <input type="text" id="ghRepo" placeholder="例：my-autopost" autocomplete="off" spellcheck="false">
+    </div>
+  </div>
+  <p class="hint">ここを入れると、各手順の「この画面を開く」ボタンが、あなた専用の画面に直接つながります。</p>
+</section>
+
+<div class="note key"><b>大切なお願い</b>　このあと発行する「鍵」（キー・トークン）は、販売者を含め、誰にも送らないでください。あなたのGitHubの中にだけ貼り付けます。レクチャー動画の中でも、鍵の文字は映していません。</div>
+
+<!-- STEPS -->
+<article class="card step" data-step="github">
+  <div class="head"><div class="num">1</div><div><h2>GitHubに登録する</h2><div class="meta">約3分｜すでにアカウントがある方は「できた」を押して次へ</div></div></div>
+  <div class="body">
+    <p>自動投稿の仕組みを置いておく場所です。無料で使えます。</p>
+    <ol class="do">
+      <li>下のボタンからGitHubを開いて、「Sign up」を押す</li>
+      <li>メールアドレス・パスワード・ユーザー名を決める</li>
+      <li>届いたメールのコードを入力する</li>
+      <li>決めたユーザー名を、このページ上の「GitHubのユーザー名」に入れる</li>
+    </ol>
+    <a class="go" href="https://github.com/signup" target="_blank" rel="noopener">GitHubを開く<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h7v7M13 3 4 12"/></svg></a>
+    <div class="check"><button type="button">できた</button><span></span></div>
+  </div>
+</article>
+
+<article class="card step" data-step="copy">
+  <div class="head"><div class="num">2</div><div><h2>仕組みを、自分の場所にコピーする</h2><div class="meta">約2分</div></div></div>
+  <div class="body">
+    <p>納品メールのあと、GitHubから「招待」のメールが届きます。</p>
+    <ol class="do">
+      <li>招待メールの「View invitation」→「Accept invitation」を押す（下のボタンからでも開けます）</li>
+      <li>開いたページの右上、緑の <b>「Use this template」→「Create a new repository」</b> を押す</li>
+      <li>Repository name に名前を入れる（例：<code>my-autopost</code>）。同じ名前を、このページ上の「置き場所の名前」にも入れる</li>
+      <li class="plan-a"><b>Private</b>（非公開）を選んで「Create repository」</li>
+      <li class="plan-bc"><b>Public</b>（公開）を選んで「Create repository」<br><span class="hint">Instagramは、ネット上から見える画像しか投稿できないためです。投稿の文章や鍵は見えません。</span></li>
+    </ol>
+    <a class="go" href="https://github.com/2020activemime-ship-it/autopost-template/invitations" target="_blank" rel="noopener">招待を承認する<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h7v7M13 3 4 12"/></svg></a>
+    <a class="go ghost" href="https://github.com/2020activemime-ship-it/autopost-template/generate" target="_blank" rel="noopener">コピーを作る画面を開く<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h7v7M13 3 4 12"/></svg></a>
+    <div class="check"><button type="button">できた</button><span></span></div>
+  </div>
+</article>
+
+<article class="card step" data-step="perm">
+  <div class="head"><div class="num">3</div><div><h2>書き込みを許可する</h2><div class="meta">約1分｜ここを忘れると、投稿の記録が残りません</div></div></div>
+  <div class="body">
+    <ol class="do">
+      <li>下のボタンで設定画面を開く</li>
+      <li>いちばん下の <b>Workflow permissions</b> を <b>「Read and write permissions」</b> に変える</li>
+      <li>「Save」を押す</li>
+    </ol>
+    <a class="go need-repo" data-path="/settings/actions" href="#" target="_blank" rel="noopener">この画面を開く<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h7v7M13 3 4 12"/></svg></a>
+    <p class="hint need-repo-hint">上の2か所（ユーザー名・置き場所の名前）を入れると押せるようになります。</p>
+    <div class="check"><button type="button">できた</button><span></span></div>
+  </div>
+</article>
+
+<article class="card step" data-step="x">
+  <div class="head"><div class="num">4</div><div><h2>Xの鍵を4つ発行する</h2><div class="meta">約7分｜いちばんつまずきやすい手順です。ゆっくりで大丈夫です</div></div></div>
+  <div class="body">
+    <ol class="do">
+      <li>下のボタンでXの開発者ページを開き、いつものXアカウントでログイン</li>
+      <li>「Projects &amp; Apps」でアプリを作る（名前は何でもOK）</li>
+      <li><b>Settings → User authentication settings</b> を開き、次のとおりに入れて保存
+        <div class="tbl"><table>
+          <tr><th>項目</th><th>入れるもの</th><th></th></tr>
+          <tr><td>App permissions</td><td><b>Read and Write</b></td><td></td></tr>
+          <tr><td>Type of App</td><td>Web App, Automated App or Bot</td><td></td></tr>
+          <tr><td>Callback URI</td><td><code>https://example.com/callback</code></td><td><button class="cp" data-copy="https://example.com/callback">コピー</button></td></tr>
+          <tr><td>Website URL</td><td>あなたのSNSやブログのURL</td><td></td></tr>
+        </table></div>
+      </li>
+      <li><b>「Keys and tokens」</b>のタブで、次の4つを発行してメモ帳に控える<br>API Key ／ API Key Secret ／ Access Token ／ Access Token Secret</li>
+      <li>開発者ページで、利用料を少しだけ入金しておく</li>
+    </ol>
+    <div class="note warn"><b>いちばん多いつまずき</b>　権限を「Read and Write」に変えたあとで、Access Token を<b>作り直して</b>ください。変える前に作ったトークンのままだと、投稿のときに <code>403 Forbidden</code> になります。</div>
+    <div class="note tip"><b>利用料の目安</b>　Xは1本ごとにかかります。リンクなし約2円、リンクあり約30円。1日5本で月300〜500円ほどです。残高がなくなると <code>402</code> と出て止まります。</div>
+    <a class="go" href="https://developer.x.com/en/portal/dashboard" target="_blank" rel="noopener">Xの開発者ページを開く<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h7v7M13 3 4 12"/></svg></a>
+    <div class="check"><button type="button">できた</button><span></span></div>
+  </div>
+</article>
+
+<article class="card step" data-step="threads">
+  <div class="head"><div class="num">5</div><div><h2>Threadsの鍵を発行する</h2><div class="meta">約5分｜Facebookのアカウントが要ります（Facebookには投稿しません）</div></div></div>
+  <div class="body">
+    <ol class="do">
+      <li>下のボタンでMetaの開発者ページを開いてログイン</li>
+      <li>「アプリを作成」→ 用途で <b>Threads API</b> を選ぶ</li>
+      <li>「役割」→「Threadsテスター」に、あなたのThreadsアカウントを追加</li>
+      <li>スマホのThreadsアプリで、<b>設定 → アカウント → ウェブサイトのアクセス許可 → 招待</b> を開いて承認</li>
+      <li>開発者ページに戻り、アクセストークンを発行してメモ帳に控える</li>
+    </ol>
+    <div class="note warn"><b>60日で切れます</b>　Threadsの鍵には期限があります。60日たったら、同じ手順で作り直して貼り替えてください。カレンダーに入れておくと安心です。</div>
+    <a class="go" href="https://developers.facebook.com/apps" target="_blank" rel="noopener">Metaの開発者ページを開く<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h7v7M13 3 4 12"/></svg></a>
+    <div class="check"><button type="button">できた</button><span></span></div>
+  </div>
+</article>
+
+<article class="card step plan-bc-step" data-step="ig">
+  <div class="head"><div class="num">6</div><div><h2>Instagramの鍵と、画像の置き場所</h2><div class="meta">約5分｜プランB・Cの方</div></div></div>
+  <div class="body">
+    <ol class="do">
+      <li>Instagramアプリで、<b>プロアカウント</b>（ビジネス／クリエイター）に切り替える（無料）</li>
+      <li>手順5と同じMetaのアプリに <b>Instagram</b> を追加して、アクセストークンを発行する</li>
+      <li>画像を置く場所をつくる：下のボタンで設定を開き、Source を <b>Deploy from a branch</b>、Branch を <b>main ／ (root)</b> にして「Save」</li>
+      <li>数分待つ。あなたの画像の置き場所は、次のURLになります
+        <pre id="imgUrl">https://（ユーザー名）.github.io/（置き場所の名前）/images</pre>
+        <button class="cp" data-copy-from="imgUrl">URLをコピー</button>
+      </li>
+    </ol>
+    <a class="go need-repo" data-path="/settings/pages" href="#" target="_blank" rel="noopener">画像の置き場所の設定を開く<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h7v7M13 3 4 12"/></svg></a>
+    <div class="check"><button type="button">できた</button><span></span></div>
+  </div>
+</article>
+
+<article class="card step" data-step="secrets">
+  <div class="head"><div class="num">7</div><div><h2>鍵を貼り付ける</h2><div class="meta">約5分｜1つずつ「名前」と「中身」を入れて保存します</div></div></div>
+  <div class="body">
+    <ol class="do">
+      <li>下のボタンで、鍵を入れる画面を開く</li>
+      <li><b>Name</b> に下の表の「名前」をコピーして貼る。<b>Secret</b> に中身を貼る</li>
+      <li>「Add secret」で保存。これを表の行の数だけくり返す（貼ったら表にチェック）</li>
+    </ol>
+    <a class="go need-repo" data-path="/settings/secrets/actions/new" href="#" target="_blank" rel="noopener">鍵を入れる画面を開く<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h7v7M13 3 4 12"/></svg></a>
+    <div class="tbl"><table id="secretTable">
+      <tr><th>済</th><th>名前（Name）</th><th></th><th>中身（Secret）</th></tr>
+      <tr><td><input type="checkbox" aria-label="済"></td><td><code>X_API_KEY</code></td><td><button class="cp" data-copy="X_API_KEY">コピー</button></td><td>XのAPI Key</td></tr>
+      <tr><td><input type="checkbox" aria-label="済"></td><td><code>X_API_SECRET</code></td><td><button class="cp" data-copy="X_API_SECRET">コピー</button></td><td>XのAPI Key Secret</td></tr>
+      <tr><td><input type="checkbox" aria-label="済"></td><td><code>X_ACCESS_TOKEN</code></td><td><button class="cp" data-copy="X_ACCESS_TOKEN">コピー</button></td><td>XのAccess Token（作り直したもの）</td></tr>
+      <tr><td><input type="checkbox" aria-label="済"></td><td><code>X_ACCESS_SECRET</code></td><td><button class="cp" data-copy="X_ACCESS_SECRET">コピー</button></td><td>XのAccess Token Secret</td></tr>
+      <tr><td><input type="checkbox" aria-label="済"></td><td><code>THREADS_USER_ID</code></td><td><button class="cp" data-copy="THREADS_USER_ID">コピー</button></td><td><code>me</code> と入れる <button class="cp" data-copy="me">me をコピー</button></td></tr>
+      <tr><td><input type="checkbox" aria-label="済"></td><td><code>THREADS_ACCESS_TOKEN</code></td><td><button class="cp" data-copy="THREADS_ACCESS_TOKEN">コピー</button></td><td>Threadsのアクセストークン</td></tr>
+      <tr class="plan-bc"><td><input type="checkbox" aria-label="済"></td><td><code>IG_USER_ID</code></td><td><button class="cp" data-copy="IG_USER_ID">コピー</button></td><td><code>me</code> と入れる <button class="cp" data-copy="me">me をコピー</button></td></tr>
+      <tr class="plan-bc"><td><input type="checkbox" aria-label="済"></td><td><code>IG_ACCESS_TOKEN</code></td><td><button class="cp" data-copy="IG_ACCESS_TOKEN">コピー</button></td><td>Instagramのアクセストークン</td></tr>
+      <tr class="plan-bc"><td><input type="checkbox" aria-label="済"></td><td><code>IMAGE_BASE_URL</code></td><td><button class="cp" data-copy="IMAGE_BASE_URL">コピー</button></td><td>手順6のURL</td></tr>
+    </table></div>
+    <div class="note warn"><b>見えない空白に注意</b>　貼るとき、文字の前後に空白（とくに全角スペース）が混ざると、見た目は正しくても動きません。うまくいかないときは、一度消して貼り直してください。</div>
+    <div class="check"><button type="button">できた</button><span></span></div>
+  </div>
+</article>
+
+<article class="card step" data-step="test">
+  <div class="head"><div class="num">8</div><div><h2>投稿せずに、動くか確かめる</h2><div class="meta">約3分｜鍵が正しいかだけを確認します</div></div></div>
+  <div class="body">
+    <ol class="do">
+      <li>下のボタンで「autopost」の画面を開く</li>
+      <li>右の <b>「Run workflow」</b> を押す。<code>dry_run</code> は <b>1</b>、<code>watch</code> は <b>0</b> のまま、緑の「Run workflow」</li>
+      <li>1分ほどで一覧に結果が出ます。いちばん上を開いて「watch and post」の中を見る</li>
+    </ol>
+    <p>こう出ていれば成功です。</p>
+<pre>=== 鍵チェック ===
+threads: OK @あなたのアカウント名
+x: OK @あなたのアカウント名
+<span class="plan-bc">instagram: OK @あなたのアカウント名</span></pre>
+    <p class="hint"><code>NG</code> と出たら、ページ下の「うまくいかないとき」を見てください。</p>
+    <a class="go need-repo" data-path="/actions/workflows/autopost.yml" href="#" target="_blank" rel="noopener">autopostの画面を開く<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h7v7M13 3 4 12"/></svg></a>
+    <div class="check"><button type="button">できた</button><span></span></div>
+  </div>
+</article>
+
+<article class="card step" data-step="posts">
+  <div class="head"><div class="num">9</div><div><h2>投稿の中身を確かめる</h2><div class="meta">約5分｜お作りした投稿が入っています</div></div></div>
+  <div class="body">
+    <p>ヒアリングをもとにお作りした投稿は、<code>schedule.json</code> に日時つきで入っています。</p>
+    <ol class="do">
+      <li>下のボタンで中身を開く</li>
+      <li>直したいところがあれば、右上の鉛筆マークで書き換えて「Commit changes」</li>
+      <li><code>"at"</code> が投稿する日時（日本時間）、<code>"text"</code> が文章です。記号の <code>"</code> や <code>,</code> は消さないようにしてください</li>
+    </ol>
+    <div class="note tip">書き換えに自信がないときは、直したい文章をメールで送っていただければ、30日間はこちらで差し替えます。</div>
+    <a class="go need-repo" data-path="/blob/main/schedule.json" href="#" target="_blank" rel="noopener">投稿の中身を開く<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h7v7M13 3 4 12"/></svg></a>
+    <div class="check"><button type="button">できた</button><span></span></div>
+  </div>
+</article>
+
+<article class="card step" data-step="start">
+  <div class="head"><div class="num">10</div><div><h2>自動投稿を、スタートする</h2><div class="meta">約1分｜これで最後です</div></div></div>
+  <div class="body">
+    <ol class="do">
+      <li>手順8と同じ画面で、もう一度 <b>「Run workflow」</b></li>
+      <li>今度は <code>dry_run</code> を <b>0</b>、<code>watch</code> を <b>1</b> にして実行</li>
+      <li>黄色い丸が回っていれば、見張りが始まっています。そのままページを閉じて大丈夫です</li>
+    </ol>
+    <p>このあとは、毎朝4時から夜23時まで自動で見張り、決めた時間になったら投稿します。パソコンを閉じていても動きます。<b>あなたがやることは、もうありません。</b></p>
+    <a class="go need-repo" data-path="/actions/workflows/autopost.yml" href="#" target="_blank" rel="noopener">autopostの画面を開く<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h7v7M13 3 4 12"/></svg></a>
+    <div class="check"><button type="button">できた</button><span></span></div>
+  </div>
+</article>
+
+<section class="card finish" id="finish" hidden>
+  <div class="eyebrow">COMPLETE</div>
+  <h2>おつかれさまでした</h2>
+  <p>設定はすべて終わりです。はじめの投稿が出たら、SNSで見てみてください。<br>ここからは、仕組みが毎日かわりに働きます。</p>
+</section>
+
+<section class="card trouble" aria-labelledby="tt">
+  <h2 id="tt" style="font-family:'Shippori Mincho',serif;margin:0 0 6px;font-size:1.1rem">うまくいかないとき</h2>
+  <details><summary>Xだけ失敗する<code>403 Forbidden</code></summary><p>権限が「Read」のままか、権限を変えたあとでAccess Tokenを作り直していません。手順4の最後をやり直して、手順7で <code>X_ACCESS_TOKEN</code> と <code>X_ACCESS_SECRET</code> を貼り替えてください（同じ名前で作ると上書きされます）。</p></details>
+  <details><summary>Xが止まった<code>402</code></summary><p>Xの利用料の残高がなくなっています。Xの開発者ページで入金すると、次の投稿から再開します。</p></details>
+  <details><summary>鍵が通らない<code>Invalid OAuth access token</code></summary><p>鍵の前後に空白が入っているか、期限が切れています。Threadsは60日で切れます。一度消して、貼り直してください。</p></details>
+  <details><summary>Instagramだけ失敗する</summary><p>プロアカウントになっているか、手順6の画像の置き場所が設定されているか、置き場所がPublic（公開）になっているかを確かめてください。</p></details>
+  <details><summary>投稿の記録が残らない／同じ投稿が何度も出そうになる</summary><p>手順3の「Read and write permissions」が保存されているか確かめてください。</p></details>
+  <details><summary>決めた時間に出ない</summary><p>GitHubの混み具合で、数分〜十数分遅れることがあります。1時間以上出ないときは、手順10の画面で黄色い丸（見張り）が動いているか見てください。止まっていたら、手順10をもう一度。</p></details>
+  <details><summary>それでも直らない</summary><p>autopostの画面で失敗した回（赤いバツ）を開き、赤い行をそのままコピーして、納品メールに返信してください。鍵そのものは送らないでください。30日間、1〜3営業日以内にお返事します。</p></details>
+</section>
+
+<footer>
+  制作：AIにやらせる女　<a href="https://2020activemime-ship-it.github.io/">公式アプリ</a><br>
+  <button type="button" class="reset" id="reset">進み具合をリセット</button>
+</footer>
+
+</div>
+
+<script>
+(() => {
+  const KEY = "ai_woman_setup_v1";
+  let st = {};
+  try { st = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { st = {}; }
+  st.done = st.done || {}; st.sec = st.sec || {};
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
+
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const user = $("#ghUser"), repo = $("#ghRepo");
+  user.value = st.user || ""; repo.value = st.repo || "";
+
+  function clean(v) { return v.trim().replace(/^https?:\/\/github\.com\//, "").replace(/[\/\s　]+/g, ""); }
+
+  function render() {
+    const plan = st.plan || "B";
+    const ig = plan !== "A";
+    $$(".plans button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.plan === plan)));
+    $$(".plan-bc, .plan-bc-step").forEach(el => el.hidden = !ig);
+    $$(".plan-a").forEach(el => el.hidden = ig);
+
+    const u = clean(st.user || ""), r = clean(st.repo || "");
+    const ok = u && r;
+    $$("a.need-repo").forEach(a => {
+      a.href = ok ? `https://github.com/${u}/${r}${a.dataset.path}` : "#";
+      a.setAttribute("aria-disabled", String(!ok));
+    });
+    $$(".need-repo-hint").forEach(p => p.hidden = !!ok);
+    $("#imgUrl").textContent = `https://${u || "（ユーザー名）"}.github.io/${r || "（置き場所の名前）"}/images`;
+
+    // steps: renumber visible ones
+    const steps = $$(".step").filter(s => !s.hidden);
+    let n = 0, next = null;
+    steps.forEach((s, i) => {
+      s.querySelector(".num").textContent = i + 1;
+      const d = !!st.done[s.dataset.step];
+      s.classList.toggle("done", d);
+      const btn = s.querySelector(".check button");
+      btn.textContent = d ? "できた ✓" : "できた";
+      btn.setAttribute("aria-pressed", String(d));
+      s.querySelector(".check span").textContent = d ? "（もう一度押すと戻せます）" : "";
+      if (d) n++; else if (!next) next = s;
+    });
+    $("#barFill").style.width = (steps.length ? n / steps.length * 100 : 0) + "%";
+    $("#barText").textContent = `${n} / ${steps.length} 完了`;
+    $("#barNext").textContent = next ? "次：" + next.querySelector("h2").textContent : "すべて完了";
+    $("#finish").hidden = n !== steps.length;
+
+    $$("#secretTable input[type=checkbox]").forEach((c, i) => c.checked = !!st.sec[i]);
+  }
+
+  $$(".plans button").forEach(b => b.addEventListener("click", () => { st.plan = b.dataset.plan; save(); render(); }));
+  user.addEventListener("input", () => { st.user = user.value; save(); render(); });
+  repo.addEventListener("input", () => { st.repo = repo.value; save(); render(); });
+
+  $$(".step").forEach(s => s.querySelector(".check button").addEventListener("click", () => {
+    const k = s.dataset.step;
+    st.done[k] = !st.done[k]; save(); render();
+    if (st.done[k]) {
+      const nx = $$(".step").filter(x => !x.hidden && !st.done[x.dataset.step])[0];
+      if (nx) nx.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+    }
+  }));
+
+  $$("#secretTable input[type=checkbox]").forEach((c, i) => c.addEventListener("change", () => { st.sec[i] = c.checked; save(); }));
+
+  $$(".cp").forEach(b => b.addEventListener("click", async () => {
+    const text = b.dataset.copy || ($("#" + b.dataset.copyFrom) || {}).textContent || "";
+    try { await navigator.clipboard.writeText(text.trim()); }
+    catch (e) {
+      const t = document.createElement("textarea"); t.value = text.trim(); document.body.appendChild(t); t.select();
+      try { document.execCommand("copy"); } catch (_) {} t.remove();
+    }
+    const old = b.textContent; b.textContent = "コピーしました"; b.classList.add("ok");
+    setTimeout(() => { b.textContent = old; b.classList.remove("ok"); }, 1400);
+  }));
+
+  $("#reset").addEventListener("click", () => {
+    if (!confirm("チェックと入力内容を消して、最初からにしますか？")) return;
+    st = { done: {}, sec: {} }; user.value = ""; repo.value = ""; save(); render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
