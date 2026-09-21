@@ -90,7 +90,12 @@
   .note.warn{background:var(--warn-soft);color:var(--warn)}
   .note.warn b{color:var(--warn)}
   .note.tip{background:var(--gold-soft);color:#6f5620}
-  .note.key{background:var(--sakura-soft);color:#8a3f55}
+  .alert{display:flex;gap:14px;align-items:flex-start;margin:18px 0;padding:18px 20px;border-radius:14px;
+    background:#fff;border:2px solid #b84a67;box-shadow:0 10px 26px -18px rgba(150,40,70,.55)}
+  .alert svg{flex:none;width:30px;height:30px;color:#b84a67;margin-top:2px}
+  .alert b{display:block;font-size:1.02rem;color:#b84a67;letter-spacing:.06em;margin-bottom:2px}
+  .alert p{margin:0;color:var(--ink);font-size:.92rem}
+  .alert strong{background:linear-gradient(transparent 60%,#f6d2dc 60%)}
   .check{display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
   .check button{padding:8px 16px;border-radius:999px;border:1px solid var(--sakura);background:#fff;color:var(--sakura);font-size:.86rem}
   .step.done .check button{background:var(--ok);border-color:var(--ok);color:#fff}
@@ -158,7 +163,11 @@
 
 </section>
 
-<div class="note key"><b>大切なお願い</b>　このあと発行する「鍵」（キー・トークン）は、販売者を含め、誰にも送らないでください。あなたのGitHubの中にだけ貼り付けます。レクチャー動画の中でも、鍵の文字は映していません。</div>
+<div class="alert" role="note">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></svg>
+  <div><b>大切なお願い</b>
+  <p>このあと発行する「鍵」（キー・トークン）は、<strong>販売者を含め、誰にも送らないでください。</strong>あなたのGitHubの中にだけ貼り付けます。レクチャー動画の中でも、鍵の文字は映していません。</p></div>
+</div>
 
 <!-- STEPS -->
 <article class="card step" data-step="github">
